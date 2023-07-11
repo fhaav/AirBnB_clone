@@ -26,4 +26,4 @@ The console will call the corresponding method and execute the associated logic.
 
 Examples:
 Here are a few examples of how to use the Airbnb clone console:
-To list all available listings
+To list all available listings in a 
