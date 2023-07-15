@@ -3,12 +3,11 @@ import json
 import os
 import datetime
 from models.base_model import BaseModel
-from models.place import Place
-from models.state import State
+from models.user import User
 from models.city import City
 from models.amenity import Amenity
+from models.place import Place
 from models.review import Review
-
 """
 FileStorage that serializes instances to a JSON file
 and deserializes JSON file to instances:
@@ -17,16 +16,6 @@ class FileStorage:
     """ A fileStorage class """
     __file_path = "json.file"
     __objects = {}
-
-    self.classes = {
-                "BaseModel": BaseModel,
-                "User": User,
-                "Place": Place,
-                "State": State,
-                "City": City,
-                "Amenity": Amenity,
-                "Review": Review
-                }
 
     def all(self):
         """
@@ -68,44 +57,4 @@ class FileStorage:
                     dict_1 = dict_obj2[key]["__class__"]
                     obj = eval(dict_1)(**dict_obj2[key])
                     self.__objects[key] = obj
-
-    def attributes(self):
-        """
-         return the valid attributes
-        """
-        attributes = {
-                "BaseModel":
-                        {"id": str,
-                        "created_at": datetime.datetime,
-                        "updated_at": datetime.datetime}
-                "User":
-                        {"email": str,
-                        "password": str,
-                        "first_name": str,
-                        "last_name": str}
-                "State":
-                        {"name": str}
-                "City":
-                        {"state_id": str,
-                        "name": str}
-                "Amenity":
-                        {"name": str}
-                "Place":
-                        {"city_id": str,
-                        "user_id": str,
-                        "name": str,
-                        "description": str,
-                        "number_rooms": int,
-                        "number_bathrooms": int,
-                        "max_guest": int,
-                        "Price_by_night": int,
-                        "latitude": float,
-                        "longitude": float,
-                        "amenity_ids": float}
-                "Review":
-                        {"place_id": str,
-                        "user_id": str,
-                        "text": str}
-                        }
-        return attributes
 
