@@ -26,13 +26,13 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new()
+            storage.save()
 
     def __str__(self):
         """
         string representation of the object
         """
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}]"
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """
@@ -47,9 +47,8 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        dict_obj = {}
+        dict_obj = self.__dict__.copy()
         dict_obj["__class__"] = self.__class__.__name__
-        dict_obj["created_at"] = dict_obj["created_at"].isoformat()
-        dict_obj["updated_at"] = dict_obj["updated_at"].isoformat()
+        dict_obj["created_at"] = self.created_at.isoformat()
+        dict_obj["updated_at"] = self.updated_at.isoformat()
         return dict_obj
-
