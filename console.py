@@ -123,7 +123,6 @@ class HBNBCommand(cmd.Cmd):
                         dict_str.append(str(values))
                 print(dict_str)
 
-
     def do_count(self, line):
         """Usage: count <class> or <class>.count()
         Retrieve the number of instances of a given class.
@@ -179,7 +178,8 @@ class HBNBCommand(cmd.Cmd):
             obj = obj_dict["{}.{}".format(arg[0], arg[1])]
             for key, values in eval(arg[2]).items():
                 if (key in obj.__class__.__dict__.keys() and
-                        type(obj.__class__.__dict__[key]) in {str, int, float}):
+                        type(obj.__class__.__dict__[key])
+                        in {str, int, float}):
                     valtype = type(obj.__class__.__dict__[key])
                     obj.__dict__[key] = valtype(values)
                 else:
@@ -204,6 +204,7 @@ class HBNBCommand(cmd.Cmd):
         """
         print("")
         return True
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

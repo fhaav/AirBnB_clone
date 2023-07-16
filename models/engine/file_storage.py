@@ -13,6 +13,8 @@ from models.review import Review
 FileStorage that serializes instances to a JSON file
 and deserializes JSON file to instances:
 """
+
+
 class FileStorage:
     """ A fileStorage class """
     __file_path = "json.file"
@@ -40,7 +42,7 @@ class FileStorage:
         dict_obj = {}
         for key, values in FileStorage.__objects.items():
             dict_obj[key] = values.to_dict()
-        with open(FileStorage.__file_path, "w", encoding = "utf-8") as Jsonfil:
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as Jsonfil:
             json.dump(dict_obj, Jsonfil)
 
     def reload(self):
@@ -52,10 +54,9 @@ class FileStorage:
         """
         from models.base_model import BaseModel
         if os.path.isfile(self.__file_path):
-            with open(self.__file_path, "r", encoding = "utf-8") as Jsonfil:
+            with open(self.__file_path, "r", encoding="utf-8") as Jsonfil:
                 dict_obj2 = json.load(Jsonfil)
                 for key in dict_obj2.keys():
                     dict_1 = dict_obj2[key]["__class__"]
                     obj = eval(dict_1)(**dict_obj2[key])
                     self.__objects[key] = obj
-

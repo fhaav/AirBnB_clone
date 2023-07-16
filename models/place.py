@@ -2,6 +2,7 @@
 """ class inherit from the BaeModel """
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """ class definition of Place """
     city_id = ""
