@@ -15,13 +15,14 @@ class BaseModel:
         **kwargs arguments for the constructor of a BaseModel
         """
         if kwargs:
-            for key, values in kwargs.items():
-                if key in ["id", "created_at", "updated_at"]:
-                    if key == "created_at" or key == "updated_at":
-                        dtime_obj = datetime.strptime(values, "%Y-%m-%dT%H:%M:%S.%f")
-                        setattr(self, key, dtime_obj)
-                    else:
-                        setattr(self, key, values)
+            for key in kwargs:
+                if key == "created_at":
+                    self.__dict__["created_at"] = datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "updated_at":
+                    self.__dict__["updated_at"] = datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                else:
+                    self.__dict__[key] = kwargs[key]
+
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -48,7 +49,7 @@ class BaseModel:
         of __dict__ of the instance
         """
         dict_obj = self.__dict__.copy()
-        dict_obj["__class__"] = self.__class__.__name__
+        dict_obj["__class__"] = type(self).__name__
         dict_obj["created_at"] = self.created_at.isoformat()
         dict_obj["updated_at"] = self.updated_at.isoformat()
         return dict_obj

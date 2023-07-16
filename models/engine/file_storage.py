@@ -22,7 +22,7 @@ class FileStorage:
         """
         returns the dictionary __objects
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
@@ -30,7 +30,7 @@ class FileStorage:
         key <obj class name>.id
         """
         key = "{}.{}".format(type(obj).__name__, obj.id)
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """
@@ -38,9 +38,9 @@ class FileStorage:
         JSON file (path: __file_path)
         """
         dict_obj = {}
-        for key, values in self.__objects.items():
+        for key, values in FileStorage.__objects.items():
             dict_obj[key] = values.to_dict()
-        with open(self.__file_path, "w", encoding = "utf-8") as Jsonfil:
+        with open(FileStorage.__file_path, "w", encoding = "utf-8") as Jsonfil:
             json.dump(dict_obj, Jsonfil)
 
     def reload(self):

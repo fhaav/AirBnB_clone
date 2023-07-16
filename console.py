@@ -3,10 +3,11 @@
 that contains the entry point of the command interpreter
 """
 import cmd
-import string
 import json
+import re
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
 from models.place import Place
 from models.city import City
 from models.amenity import Amenity
@@ -19,7 +20,6 @@ class HBNBCommand(cmd.Cmd):
     class definition
     """
     prompt = "(hbnb) "
-    identchar = string.ascii_letters + string.digits + '_' + ',' + ' '
 
     __classes = {
             "BaseModel",
@@ -30,6 +30,27 @@ class HBNBCommand(cmd.Cmd):
             "Place",
             "Review"
             }
+
+    def default(self, line):
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", line)
+        if match is not None:
+            argl = [line[:match.span()[0]], line[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(line))
+        return False
 
     def do_create(self, line):
         """
@@ -109,8 +130,9 @@ class HBNBCommand(cmd.Cmd):
         """
         arg = line.split()
         count = 0
-        for obj in storage.all().values():
-            if arg[0] == obj.__class__.__name__:
+        obj_dict3 = storage.all()
+        for i in obj_dict3.keys():
+            if line in i:
                 count += 1
         print(count)
 
