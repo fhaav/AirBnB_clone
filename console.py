@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         Deletes an instance based on the class name and id
         (save the change into the JSON file)
         """
-        arg = line.split()
+        arg = parse(line)
         obj_dict = storage.all()
         if len(arg) == 0:
             print("** class name missing **")
@@ -130,8 +130,8 @@ class HBNBCommand(cmd.Cmd):
         arg = line.split()
         count = 0
         obj_dict3 = storage.all()
-        for i in obj_dict3.keys():
-            if line in i:
+        for obj in obj_dict3.keys():
+            if line in obj:
                 count += 1
         print(count)
 
