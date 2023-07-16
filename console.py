@@ -128,12 +128,18 @@ class HBNBCommand(cmd.Cmd):
         Retrieve the number of instances of a given class.
         """
         arg = line.split()
-        count = 0
-        obj_dict3 = storage.all()
-        for obj in obj_dict3.keys():
-            if line in obj:
-                count += 1
-        print(count)
+        if len(line) == 0:
+            print("** class name missing **")
+        else:
+            if args[0] not in self.__class:
+                print("** class doesn't exist **")
+            else:
+                obj_dict3 = storage.all()
+                cunt = 0
+                for key in obj_dict3.keys():
+                    if line in key:
+                        cunt += 1
+                print(cunt)
 
     def do_update(self, line):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
