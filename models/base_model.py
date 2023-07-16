@@ -52,8 +52,11 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        dict_obj4 = self.__dict__.copy()
-        dict_obj4["__class__"] = type(self).__name__
-        dict_obj4["created_at"] = self.created_at.isoformat()
-        dict_obj4["updated_at"] = self.updated_at.isoformat()
-        return dict_obj4
+        dict_obj = {}
+        for key, values in self.__dict__.items():
+            if key in ("created_at", "updated_at"):
+                dict_obj[key] = values.isoformat()
+            else:
+                dict_obj[key] = values
+        dict_obj["__class__"] = type(self).__name__
+        return dict_obj
