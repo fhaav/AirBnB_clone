@@ -1,0 +1,42 @@
+/*
+* Filters Style
+*/
+.filter{
+   background-color: white;
+   height: 70px;
+   width: 100%;
+   border: 1px #dddddd;
+   border-radius: 4px; 
+}
+.filter button{
+    font-size: 18px;
+    background-color: #ff5a5f;
+    height: 48px;
+    width: 20%;
+    border: none;
+    float: right;
+    margin: 12px 30px;
+}
+.filter button:hover{
+    background-color: rgba(255, 90, 95, 0.9);
+}
+.location .amenities{
+    height: 100%;
+    width: 25%;
+    display: inline-block;
+}
+.location{
+    border-right: 1px solid #dddddd;
+}
+h3{
+    font-weight: 600;
+    font-size: 1.20em;
+    height: 50%;
+    padding: 15px 0 0 30px; 
+}
+h4{
+    height: 50%;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px 0 10px 30px;
+}
