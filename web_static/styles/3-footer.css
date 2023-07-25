@@ -2,14 +2,11 @@
  * Footer Style
  */
  footer{
-    background-color: white;
+    color: white;
     height: 60px;
     width: 100%;
-    border-top: 1px #cccccc;
+    border-top: 1px solid #cccccc;
     text-align: center;
-    bottom: 0;
-    align-items: center;
-    position: absolute;
     display: flex;
     justify-content: center;
 }

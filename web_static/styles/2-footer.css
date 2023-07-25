@@ -2,13 +2,11 @@
  * Footer style
  */
  footer{
-    background-color: #00ff00;
+    color: #00ff00;
     height: 60px;
     width: 100%;
     text-align: center;
-    bottom: 0;
     justify-content: center;
     position: absolute;
-    align-items: center;
     display: flex; 
 }
